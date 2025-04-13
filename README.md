@@ -6,3 +6,9 @@ This is a template for a FastAPI application that uses Thesys C1, @thesysai/genu
 
 1. Run the server: [readme](./backend/README.md)
 2. Run the UI: [readme](./ui/README.md)
+
+## Example prompt
+
+```
+what is the weather in new york?
+```
