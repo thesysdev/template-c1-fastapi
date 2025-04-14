@@ -10,5 +10,5 @@ This is a template for a FastAPI application that uses Thesys C1, @thesysai/genu
 ## Example prompt
 
 ```
-what is the weather in new york?
+demographics of US population
 ```
