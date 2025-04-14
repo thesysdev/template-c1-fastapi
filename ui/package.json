@@ -5,10 +5,10 @@
   "dependencies": {
     "@crayonai/react-ui": "0.7.6",
     "@crayonai/stream": "0.6.4",
-    "@thesysai/genui-sdk": "0.6.10",
+    "@thesysai/genui-sdk": "0.6.11",
     "@testing-library/dom": "^10.4.0",
     "@types/jest": "^27.5.2",
-    "lucide-react": "^0.482.0",
+    "lucide-react": "^0.469.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-markdown": "^10.1.0"
