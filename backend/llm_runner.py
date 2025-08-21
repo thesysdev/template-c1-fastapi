@@ -48,7 +48,7 @@ async def generate_stream(chat_request: ChatRequest) -> AsyncIterator[str]:
 
     stream = client.chat.completions.create(
         messages=conversation_history,
-        model="c1-nightly",
+        model="c1/anthropic/claude-sonnet-4/v-20250815",
         stream=True,
     )
 
