@@ -11,6 +11,7 @@ from dotenv import load_dotenv  # type: ignore
 
 from thread_store import Message, thread_store
 from openai.types.chat import ChatCompletionMessageParam
+from thesys_genui_sdk.context import get_assistant_message, write_content
 
 load_dotenv()
 
@@ -35,7 +36,7 @@ class ChatRequest(BaseModel):
     class Config:
         extra = "allow"  # Allow extra fields
 
-async def generate_stream(chat_request: ChatRequest) -> AsyncIterator[str]:
+async def generate_stream(chat_request: ChatRequest):
     conversation_history: List[ChatCompletionMessageParam] = thread_store.get_messages(chat_request.threadId)
     conversation_history.append(chat_request.prompt)
     thread_store.append_message(chat_request.threadId, Message(
@@ -43,7 +44,6 @@ async def generate_stream(chat_request: ChatRequest) -> AsyncIterator[str]:
         id=chat_request.prompt['id']
     ))
 
-    assistant_response_content = ""
     assistant_message_for_history: dict | None = None
 
     stream = client.chat.completions.create(
@@ -57,11 +57,10 @@ async def generate_stream(chat_request: ChatRequest) -> AsyncIterator[str]:
         finish_reason = chunk.choices[0].finish_reason
 
         if delta and delta.content:
-            assistant_response_content += delta.content
-            yield delta.content
+            await write_content(delta.content)
 
         if finish_reason:
-            assistant_message_for_history = {"role": "assistant", "content": assistant_response_content or None}
+            assistant_message_for_history = get_assistant_message()
 
     if assistant_message_for_history:
         conversation_history.append(assistant_message_for_history)

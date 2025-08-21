@@ -4,3 +4,4 @@ pydantic==2.11.0
 openai==1.66.3
 python-dotenv==1.0.1
 crayonai_stream==0.6.2
+thesys_genui_sdk==0.1.2
